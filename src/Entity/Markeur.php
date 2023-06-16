@@ -1,35 +1,10 @@
 <?php
 
 namespace App\Entity;
+
 use JsonSerializable;
-use App\Entity\Markeur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MarkeurRepository;
-
-/**
- * @ORM\Entity(repositoryClass=MarkeurRepository::class)
- */
-class Markeur implements JsonSerializable
-{
-    // ... tes autres méthodes et propriétés ...
-
-    public function jsonSerialize()
-    {
-        return [
-            'id' => $this->getId(),
-            'markeTitle' => $this->getMarkeTitle(),
-            'longitude'=> $this ->getLongitude(),
-            'latitude'=>$this ->getLatitude(),
-            'markeImage'=>$this->setMarkeImage(),
-            'markerDescription'=>$this->getMarkerDescription(),
-
-
-
-            // Ajoute ici toutes les autres propriétés que tu veux inclure dans le JSON
-        ];
-    }
-}
-
 #[ORM\Entity(repositoryClass: MarkeurRepository::class)]
 class Markeur
 {
@@ -116,5 +91,22 @@ class Markeur
         $this->markerDescription = $markerDescription;
 
         return $this;
+    }
+
+
+
+
+    //... tes autres getters et setters...
+
+   public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'markeTitle' => $this->getMarkeTitle(),
+            'longitude'=> $this ->getLongitude(),
+            'latitude'=>$this ->getLatitude(),
+            'markeImage'=>$this->getMarkerImage(),
+            'markerDescription'=>$this->getMarkerDescription(),
+        ];
     }
 }
